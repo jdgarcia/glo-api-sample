@@ -1,20 +1,12 @@
-const GLO_API_URL = 'https://gloapi.gitkraken.com/v1/glo';
+import { getUser } from '../gloAPI';
 
 export const login = (accessToken) => async (dispatch) => {
-  const options = {
-    headers: {
-      Authorization: 'Bearer ' + accessToken
-    }
-  };
-
-  const response = await fetch(GLO_API_URL + '/user?fields=username,email', options);
-  const user = await response.json();
-
-  if (response.status === 200) {
+  try {
+    const user = await getUser(accessToken);
     dispatch(loginSuccess(user));
     window.localStorage.setItem('gloAccessToken', accessToken);
   }
-  else {
+  catch (e) {
     window.localStorage.removeItem('gloAccessToken');
   }
 };
