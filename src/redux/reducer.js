@@ -1,5 +1,6 @@
 const getInitialState = () => ({
   accessToken: null,
+  boardData: null,
   boards: null,
   selectedBoardId: "",
   user: null
@@ -21,6 +22,12 @@ export default (state = getInitialState(), action) => {
       return {
         ...state,
         boards: action.boards
+      };
+
+    case 'fetch-board-data-success':
+      return {
+        ...state,
+        boardData: action.boardData
       };
 
     case 'select-board':

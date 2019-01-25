@@ -1,4 +1,9 @@
-import { getUser, getBoards } from '../gloAPI';
+import {
+  getUser,
+  getBoards,
+  getBoard,
+  getCards
+} from '../gloAPI';
 
 export const login = (accessToken) => async (dispatch) => {
   try {
@@ -46,11 +51,22 @@ const fetchBoardsError = (error) => ({
   error
 });
 
-export const loadBoardData = (boardId) => async (dispatch, getState) => {
+export const fetchBoardData = (boardId) => async (dispatch, getState) => {
   dispatch(selectBoard(boardId));
+
+  const board = await getBoard(getState().accessToken, boardId);
+
+  board.cards = await getCards(getState().accessToken, boardId);
+
+  dispatch(fetchBoardDataSuccess(board));
 };
 
 const selectBoard = (boardId) => ({
   type: 'select-board',
   boardId
+});
+
+const fetchBoardDataSuccess = (boardData) => ({
+  type: 'fetch-board-data-success',
+  boardData
 });
