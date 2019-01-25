@@ -1,4 +1,4 @@
-const GLO_API_URL = 'https://gloapi.gitkraken.com/v1/glo';
+import config from './config';
 
 const callGloAPI = async (endpoint, accessToken) => {
   let options;
@@ -11,7 +11,7 @@ const callGloAPI = async (endpoint, accessToken) => {
     };
   }
 
-  const response = await fetch(GLO_API_URL + endpoint, options);
+  const response = await fetch(config.GLO_API_URL + endpoint, options);
 
   if (response.status >= 400) {
     throw response;
