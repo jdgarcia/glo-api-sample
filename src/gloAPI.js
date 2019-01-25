@@ -1,4 +1,6 @@
 import config from './config';
+import store from './redux/store';
+import { logout } from './redux/actions';
 
 const callGloAPI = async (endpoint, accessToken) => {
   let options;
@@ -12,6 +14,10 @@ const callGloAPI = async (endpoint, accessToken) => {
   }
 
   const response = await fetch(config.GLO_API_URL + endpoint, options);
+
+  if (response.status === 401) {
+    store.dispatch(logout());
+  };
 
   if (response.status >= 400) {
     throw response;

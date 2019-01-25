@@ -1,4 +1,5 @@
 const getInitialState = () => ({
+  stateVersion: 1,
   accessToken: null,
   boardData: null,
   boards: null,
@@ -6,7 +7,21 @@ const getInitialState = () => ({
   user: null
 });
 
-export default (state = getInitialState(), action) => {
+const getSavedState = () => {
+  const savedStateString = window.localStorage.getItem('reduxState');
+  if (!savedStateString) {
+    return {};
+  }
+
+  const savedState = JSON.parse(savedStateString);
+
+  return {
+    ...getInitialState(),
+    ...savedState
+  };
+};
+
+export default (state = getSavedState(), action) => {
   switch (action.type) {
     case 'login-success':
       return {

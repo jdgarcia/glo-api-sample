@@ -6,14 +6,8 @@ import {
 } from '../gloAPI';
 
 export const login = (accessToken) => async (dispatch) => {
-  try {
-    const user = await getUser(accessToken);
-    dispatch(loginSuccess({ user, accessToken }));
-    window.localStorage.setItem('gloAccessToken', accessToken);
-  }
-  catch (e) {
-    window.localStorage.removeItem('gloAccessToken');
-  }
+  const user = await getUser(accessToken);
+  dispatch(loginSuccess({ user, accessToken }));
 };
 
 const loginSuccess = ({ user, accessToken }) => ({
@@ -23,7 +17,7 @@ const loginSuccess = ({ user, accessToken }) => ({
 });
 
 export const logout = (user) => (dispatch) => {
-  window.localStorage.removeItem('gloAccessToken');
+  window.localStorage.removeItem('reduxState');
   dispatch(logoutSuccess());
 };
 
