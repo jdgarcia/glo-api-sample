@@ -36,4 +36,4 @@ export const getBoard = (accessToken, boardId) =>
   callGloAPI('/boards/' + boardId + '?fields=members,labels,columns', accessToken);
 
 export const getCards = (accessToken, boardId, page = 1) =>
-  callGloAPI('/boards/' + boardId + '/cards?per_page=100&page=' + page, accessToken);
+  callGloAPI('/boards/' + boardId + '/cards?fields=labels&per_page=100&page=' + page, accessToken);

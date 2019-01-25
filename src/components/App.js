@@ -6,6 +6,7 @@ import '../styles/App.css';
 import Login from './Login';
 import ConnectedUser from './ConnectedUser';
 import BoardSelect from './BoardSelect';
+import BoardData from './BoardData';
 
 class App extends Component {
   render() {
@@ -17,6 +18,9 @@ class App extends Component {
             <>
               <ConnectedUser user={this.props.user} />
               <BoardSelect />
+              {this.props.selectedBoardId &&
+                <BoardData />
+              }
             </>
           )
         }
@@ -26,6 +30,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  selectedBoardId: state.selectedBoardId,
   user: state.user
 });
 
