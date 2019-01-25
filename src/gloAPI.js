@@ -20,4 +20,8 @@ const callGloAPI = async (endpoint, accessToken) => {
   return await response.json();
 };
 
-export const getUser = (accessToken) => callGloAPI('/user?fields=username,email', accessToken);
+export const getUser = (accessToken) =>
+  callGloAPI('/user?fields=username,email', accessToken);
+
+export const getBoards = (accessToken) =>
+  callGloAPI('/boards', accessToken);

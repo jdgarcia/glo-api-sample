@@ -5,6 +5,7 @@ import '../styles/App.css';
 
 import Login from './Login';
 import ConnectedUser from './ConnectedUser';
+import BoardSelect from './BoardSelect';
 
 class App extends Component {
   render() {
@@ -12,7 +13,12 @@ class App extends Component {
       <div className="App">
         {!this.props.user
           ? <Login />
-          : <ConnectedUser user={this.props.user} />
+          : (
+            <>
+              <ConnectedUser user={this.props.user} />
+              <BoardSelect />
+            </>
+          )
         }
       </div>
     );
